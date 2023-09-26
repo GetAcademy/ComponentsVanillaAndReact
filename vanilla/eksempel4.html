@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <click-counter startvalue="5"></click-counter>
+
+    <script>
+        // Klassebasert komponent
+
+        class ClickCounter extends HTMLElement {
+            constructor() {
+                super();
+
+                //view
+                this.attachShadow({ mode: 'open' });
+                this.textElement = document.createElement('div');
+                this.shadowRoot.appendChild(this.textElement);
+                const button = document.createElement('button');
+                button.textContent = 'Øk telleren';
+                button.addEventListener('click', this.doCount.bind(this));
+                this.shadowRoot.appendChild(button);
+            }
+
+            connectedCallback() {
+                this.count = parseInt(this.getAttribute('startvalue'));
+                this.triggerValue = parseInt(this.getAttribute('triggervalue'));
+                this.updateView();
+            }
+
+            doCount() {
+                this.count++;
+                if (this.count == this.triggerValue) {
+                    const event = new CustomEvent('triggerValueReached', { detail: { count } });
+                    element.dispatchEvent(event);
+                }
+                this.updateView();
+            }
+
+            updateView() {
+                this.textElement.innerHTML = `Teller: ${this.count}`;
+            }
+        }
+        window.customElements.define('click-counter', ClickCounter);
+    </script>
+</body>
+
+</html>

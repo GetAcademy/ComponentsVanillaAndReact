@@ -42,11 +42,16 @@
             };
         }
 
-        const counterElement = counter({ value: 10, triggerValue: 20 });
-        document.body.appendChild(counterElement);
-        counterElement.addEventListener('triggerValueReached', (event) => {
+        const counterElement1 = counter({ value: 10, triggerValue: 20 });
+        const counterElement2 = counter({ value: 5, triggerValue: 10 });
+        document.body.appendChild(counterElement1);
+        document.body.appendChild(counterElement2);
+        counterElement1.addEventListener('triggerValueReached', handleTriggerValueReached);
+        counterElement2.addEventListener('triggerValueReached', handleTriggerValueReached);
+
+        function handleTriggerValueReached(event) {
             console.log(event.detail.count);
-        });
+        }
     </script>
 </body>
 
