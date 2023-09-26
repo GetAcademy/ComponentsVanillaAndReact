@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    <click-counter startvalue="5"></click-counter>
+    <click-counter id="cc1" startvalue="5" triggervalue="10"></click-counter>
+    <click-counter id="cc2" startvalue="10" triggervalue="20"></click-counter>
 
     <script>
         // Klassebasert komponent
@@ -36,8 +37,8 @@
             doCount() {
                 this.count++;
                 if (this.count == this.triggerValue) {
-                    const event = new CustomEvent('triggerValueReached', { detail: { count } });
-                    element.dispatchEvent(event);
+                    const event = new CustomEvent('triggerValueReached', { detail: { count: this.count } });
+                    this.dispatchEvent(event);
                 }
                 this.updateView();
             }
@@ -47,6 +48,13 @@
             }
         }
         window.customElements.define('click-counter', ClickCounter);
+
+        document.getElementById('cc1').addEventListener('triggerValueReached', handleTriggerValueReached);
+        document.getElementById('cc2').addEventListener('triggerValueReached', handleTriggerValueReached);
+
+        function handleTriggerValueReached(event) {
+            console.log(event.detail.count);
+        }
     </script>
 </body>
 
