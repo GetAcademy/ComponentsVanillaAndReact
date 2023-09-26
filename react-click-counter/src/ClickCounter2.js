@@ -7,16 +7,12 @@ function ClickCounter2({ startValue, triggerValue, onTriggerValueReached }) {
     if (value >= triggerValue) {
       onTriggerValueReached(value);
     }
-  }, [value, triggerValue, onTriggerValueReached]);
-
-  const handleIncrement = () => {
-    setValue((prevValue) => prevValue + 1);
-  };
+  });
 
   return (
     <div>
       <p>Teller: {value}</p>
-      <button onClick={handleIncrement}>Øk telleren</button>
+      <button onClick={setValue(value + 1)}>Øk telleren</button>
     </div>
   );
 }
