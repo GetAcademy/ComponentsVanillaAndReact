@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Ren JavaScript-funksjon - med tilstand + emit event
+
+        function counter(props) {
+            // model
+            let count = props.value;
+
+            // view
+            const element = document.createElement('div');
+            const textElement = document.createElement('div');
+            element.appendChild(textElement);
+            updateView();
+            const button = document.createElement('button');
+            button.textContent = 'Øk telleren';
+            button.addEventListener('click', doCount);
+
+            element.appendChild(button);
+            return element;
+
+            function updateView() {
+                textElement.innerHTML = `Teller: ${count}`;
+            }
+
+            // controller
+            function doCount() {
+                count++;
+                if (count == props.triggerValue) {
+                    const event = new CustomEvent('triggerValueReached', { detail: { count } });
+                    element.dispatchEvent(event);
+                }
+                updateView();
+            };
+        }
+
+        const counterElement = counter({ value: 10, triggerValue: 20 });
+        document.body.appendChild(counterElement);
+        counterElement.addEventListener('triggerValueReached', (event) => {
+            console.log(event.detail.count);
+        });
+    </script>
+</body>
+
+</html>
