@@ -37,7 +37,8 @@
             doCount() {
                 this.count++;
                 if (this.count == this.triggerValue) {
-                    const event = new CustomEvent('triggerValueReached', { detail: { count: this.count } });
+                    const event = new CustomEvent('triggerValueReached',
+                        { detail: { count: this.count } });
                     this.dispatchEvent(event);
                 }
                 this.updateView();
@@ -55,6 +56,14 @@
         function handleTriggerValueReached(event) {
             console.log(event.detail.count);
         }
+
+        /*
+            FromAndToDateComponent
+             - bruker 2 stk. SelectDateComponent
+            SelectDateComponent
+              - bruker 3 stk. SelectNumberComponent
+            SelectNumberComponent props: min og max og current
+        */
     </script>
 </body>
 

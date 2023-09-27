@@ -21,18 +21,18 @@
             element.appendChild(textElement);
             updateView();
             const button = document.createElement('button');
-            button.textContent = 'Øk telleren';            
+            button.textContent = 'Øk telleren';
             button.addEventListener('click', doCount);
-                        
+
             element.appendChild(button);
             return element;
-            
+
             function updateView() {
-                textElement.innerHTML = `Teller: ${count}`;
+                textElement.textContent = `Teller: ${count}`;
             }
-            
+
             // controller
-            function doCount(){
+            function doCount() {
                 count++;
                 updateView();
             };
