@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <click-counter></click-counter>
+    <click-counter></click-counter>
+
+    <script>
+        // Klassebasert komponent
+        class ClickCounter extends HTMLElement {
+            connectedCallback() {
+                this.count = 0;
+                this.updateView();
+                this.addEventListener('click', this.doCount.bind(this));
+            }
+
+            doCount() {
+                this.count++;
+                this.updateView();
+            }
+
+            updateView() {
+                this.innerHTML = `<button>Teller: ${this.count}</button>`;
+            }
+        }
+        window.customElements.define('click-counter', ClickCounter);        
+    </script>
+</body>
+
+</html>
