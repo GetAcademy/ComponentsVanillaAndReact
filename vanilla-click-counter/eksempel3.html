@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -17,6 +18,8 @@
 
             // view
             const element = document.createElement('div');
+            element.classList.add('info');
+            element.style.backgroundColor = props.color;
             const textElement = document.createElement('div');
             element.appendChild(textElement);
             updateView();
@@ -42,8 +45,8 @@
             };
         }
 
-        const counterElement1 = counter({ value: 10, triggerValue: 20 });
-        const counterElement2 = counter({ value: 5, triggerValue: 10 });
+        const counterElement1 = counter({ value: 10, triggerValue: 20, color: 'lightblue' });
+        const counterElement2 = counter({ value: 5, triggerValue: 10, color: 'lightgreen'});
         document.body.appendChild(counterElement1);
         document.body.appendChild(counterElement2);
         counterElement1.addEventListener('triggerValueReached', handleTriggerValueReached);

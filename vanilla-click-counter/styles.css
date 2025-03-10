@@ -1,0 +1,6 @@
+div.info {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid gray;
+    display: inline-block;
+}

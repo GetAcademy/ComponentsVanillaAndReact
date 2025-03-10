@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -13,13 +14,15 @@
 
         function counter(props) {
             const element = document.createElement('div');
+            element.classList.add('info');
+            element.style.backgroundColor = props.color;
             element.textContent = `Teller: ${props.value}`;
             return element;
         }
 
         // Eksempelbruk:
-        const counterElement1 = counter({ value: 1 });
-        const counterElement100 = counter({ value: 100 });
+        const counterElement1 = counter({ value: 1, color: 'lightblue' });
+        const counterElement100 = counter({ value: 100, color: 'lightgreen' });
         document.body.appendChild(counterElement1);
         document.body.appendChild(counterElement100);
 
