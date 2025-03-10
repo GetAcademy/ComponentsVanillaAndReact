@@ -9,15 +9,31 @@
 </head>
 
 <body>
-    <click-counter color="lightblue" count="17"></click-counter>
-    <click-counter color="lightgreen" count="50"></click-counter>
+    <click-counter color="lightblue"></click-counter>
+    <click-counter color="lightgreen"></click-counter>
 
     <script>
         // Klassebasert komponent
         class ClickCounter extends HTMLElement {
             connectedCallback() {
                 this.color = this.getAttribute('color');
-                this.count = this.getAttribute('count') ?? 0;
+                this.count = 0;
+                this.updateView();
+                this.addEventListener('click', this.doCount.bind(this));
+                this.innerHTML = /*HTML*/`
+                    <div class="info" style="background-color: ${this.color}">
+                        <div>Teller: ${this.count}</div>
+                        <button>Øk telleren!</button>
+                    </div>
+                `;
+            }
+
+            doCount() {
+                this.count++;
+                this.updateView();
+            }
+
+            updateView() {
                 this.innerHTML = /*HTML*/`
                     <div class="info" style="background-color: ${this.color}">
                         <div>Teller: ${this.count}</div>

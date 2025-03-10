@@ -14,13 +14,15 @@
 
         function counter(props) {
             // model
-            let count = props.value;
+            let context = {
+                count: props.value,
+            };
 
             // view
             const element = document.createElement('div');
             element.classList.add('info');
             element.style.backgroundColor = props.color;
-            const textElement = document.createElement('div');
+            context.textElement = document.createElement('div');
             updateView();
             element.appendChild(textElement);
             const button = document.createElement('button');
@@ -31,12 +33,12 @@
             return element;
 
             function updateView() {
-                textElement.textContent = `Teller: ${count}`;
+                context.textElement.textContent = `Teller: ${count}`;
             }
 
             // controller
             function doCount() {
-                count++;
+                context.count++;
                 updateView();
             };
         }
